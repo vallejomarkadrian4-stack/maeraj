@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Personal Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: #F3F7F0;
+            --surface: #E4EEDF;
+            --green-light: #C4D8B8;
+            --green: #78966A;
+            --green-dark: #365B3D;
+            --text: #243D2A;
+            --muted: #70816C;
+            --white: #FFFFFF;
+            --border: #D1DFC9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .theme-button {
+            border: 1px solid var(--green);
+            background: transparent;
+            color: var(--text);
+            padding: 9px 13px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* GENERAL */
+
+        section {
+            padding: 100px 10%;
+            scroll-margin-top: 75px;
+        }
+
+        .eyebrow {
+            font-family: 'DM Mono', monospace;
+            color: var(--green);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: clamp(45px, 6vw, 78px);
+            line-height: 1.15;
+            margin-bottom: 25px;
+        }
+
+        h1 em, h2 em {
+            color: var(--green);
+        }
+
+        .section-title {
+            font-size: clamp(34px, 4vw, 50px);
+            margin-bottom: 25px;
+        }
+
+        .description {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .button {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            padding: 15px 25px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: var(--green);
+            transform: translateY(-3px);
+        }
+
+        /* HOME */
+
+        .home {
+            min-height: 85vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .home-text .description {
+            max-width: 440px;
+            margin-bottom: 30px;
+        }
+
+        .home-quote {
+            margin-top: 20px;
+        padding: 22px 0 22px 25px;
+        border-left: 2px solid var(--soft-sage);
+        font-family: var(--serif);
+        font-size: 20px;
+        line-height: 1.7;
+        font-style: italic;
+        }
+
+        .photo-container {
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+            padding: 14px;
+            background: var(--surface);
+            transform: rotate(2deg);
+            box-shadow: 15px 15px 0 var(--green-light);
+        }
+
+        .photo-container img {
+            display: block;
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            background: var(--green-light);
+        }
+
+        .photo-caption {
+            text-align: center;
+            padding: 17px 5px 5px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+        } 
+
+        /* ABOUT */
+
+        .about {
+            background: var(--surface);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        .about-grid p {
+            margin-bottom: 20px;
+        }
+
+        .about-card {
+            background: var(--background);
+            padding: 35px;
+            border-left: 3px solid var(--green);
+        }
+
+        .about-card h3 {
+            font-size: 25px;
+            margin-bottom: 18px;
+        }
+
+        .interest-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .interest-list span {
+            border: 1px solid var(--border);
+            padding: 9px 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: var(--green-dark);
+        }
+
+        /* PROJECTS */
+
+        .projects-intro {
+            max-width: 540px;
+            margin-bottom: 45px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            background: var(--white);
+            padding: 28px;
+            min-height: 280px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--green);
+            background: var(--surface);
+        }
+
+        .project-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            margin-bottom: 35px;
+        }
+
+        .project-card h3 {
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            font-size: 13px;
+            line-height: 1.9;
+            color: var(--muted);
+        }
+
+        .project-tag {
+            display: inline-block;
+            margin-top: 22px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: var(--green-dark);
+        }
+
+        /* CONTACT */
+
+        .contact {
+            text-align: center;
+            background: var(--green-dark);
+            color: var(--white);
+        }
+
+        .contact .eyebrow {
+            color: var(--green-light);
+        }
+
+        .contact h2 {
+            font-size: clamp(38px, 5vw, 60px);
+            margin-bottom: 25px;
+        }
+
+        .contact h2 em {
+            color: var(--green-light);
+        }
+
+        .contact .description {
+            max-width: 460px;
+            margin: 0 auto 30px;
+            color: #E0EBDD;
+        }
+
+        .contact .button {
+            background: var(--green-light);
+            color: var(--green-dark);
+        }
+
+        .contact .button:hover {
+            background: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+        }
+
+        .social-links a:hover {
+            color: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #203D29;
+            color: #DCE8D6;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* DARK MODE */
+
+        body.dark {
+            --background: #17291D;
+            --surface: #203A28;
+            --green-light: #456A48;
+            --green: #A4C69A;
+            --green-dark: #C8DEC0;
+            --text: #E9F1E5;
+            --muted: #B5C6B0;
+            --white: #203A28;
+            --border: #35543B;
+        }
+
+        body.dark .button {
+            color: #17291D;
+        }
+
+        body.dark .about-card {
+            background: #17291D;
+        }
+
+        body.dark .interest-list span,
+        body.dark .project-tag {
+            color: #C8DEC0;
+        }
+
+        body.dark .contact {
+            background: #102117;
+        }
+
+        body.dark .contact .button {
+            color: #17291D;
+        }
+
+        body.dark footer {
+            background: #0D1C12;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 850px) {
+            nav {
+                padding: 20px 6%;
+                flex-wrap: wrap;
+                gap: 18px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            section {
+                padding: 75px 7%;
+            }
+
+            .home {
+                grid-template-columns: 1fr;
+                gap: 55px;
+            }
+
+            .home-text {
+                text-align: center;
+            }
+
+            .home-text .description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .photo-container img {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            nav {
+                justify-content: center;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 13px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .theme-button {
+                padding: 7px 9px;
+            }
+
+            section {
+                padding: 65px 7%;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                min-height: auto;
+            }
+
+            .photo-container img {
+                height: 350px;
+            }
+
+            .about-card {
+                padding: 25px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                line-height: 1.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#home" class="logo"><img src = "logo.jpg" width = "100" height = "100"> </a>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+
+            <button class="theme-button" onclick="toggleTheme()">
+                ☾ 
+            </button>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+<section id="home" class="section">
+    <div class="hero-text">
+        <p class="hero-index">01 — INTRODUCTION</p>
+        <h1 class="hero-title">
+            A world<br>
+            of <em>my own.</em>
+        </h1>
+
+        <h2 class="hero-subtitle" font = "italic">
+            Hello, I'm Princess Maeraj.
+        </h2>
+<br>
+        <p class="body-copy">
+            A student, a dreamer, and a work in progress.
+            This is a little corner of the internet where I
+            keep the things that make me who I am.
+        </p>
+<p>
+      <br>   <a href="#about" class="button">
+            A little about me ↗
+        </a>
+</p>
+ <div class="home-quote">
+           <font size = 13> | </font> "Mind over matter"
+        </div>
+    </div>
+
+</section>
+  <!--  <section class="home" id="home">
+
+        <div class="home-text">
+            <div class="eyebrow">Welcome to my little corner</div>
+
+            <h1>
+                Hello, I'm<br>
+                <em>Princess Maeraj.</em>
+            </h1>
+
+            <p class="description">
+                A student, a dreamer, and a work in progress.
+                This is my personal space where I share a little
+                about myself, my interests, and the things I create.
+            </p>
+
+            <a href="#about" class="button">A little about me ↗</a> 
+ <div class="home-quote">
+            "Mind over matter"
+        </div>
+        </div>
+
+        </div>
+
+    </section> -->
+
+    <!-- ABOUT SECTION -->
+<section class="about" id="about">
+
+        <div class="eyebrow">02 — Get to know me</div>
+
+        <h2 class="section-title">
+            A little about <em>myself.</em>
+        </h2>
+
+        <div class="about-grid">
+
+            <div>
+                <p class="description">
+                    Hi! My name is Princess Maeraj E. Hermo. I am a student from Aklan State University (ASU) Kalibo Campus, currently taking Bachelor of Science in Information Technology major in Service Managament Business Process Outsourcing (SMBPO) who is
+                    continuously learning, discovering new interests,
+                    and working toward my dreams.
+                </p>
+
+                <p class="description">
+                    I believe that every experience teaches us
+                    something valuable. I enjoy expressing myself
+                    through creativity, spending time with the people
+                    I care about, and learning new things along the way.
+                </p>
+
+                <p class="description">
+                    This portfolio is a small reflection of who I am,
+                    what I love, and the person I hope to become.
+                </p>
+<div class="about-card">
+                <h3>Skills</h3>
+
+                <p class="description">
+                    The little things that make me happy and inspire
+                    me to keep growing.
+                </p>
+ <div class="interest-list">
+                    <span>Music</span>
+                    <span>Nature</span>
+                    <span>Creativity</span>
+                    <span>Learning</span>
+                    <span>Making memories</span>
+                </div>
+              
+            </div>
+            </div>
+  
+ 
+
+        <div class="photo-container">
+            <img src="profpic.jpg" alt="A photo of me">
+
+            <div class="photo-caption">
+                A PHOTO OF ME
+            </div>
+          
+
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+
+        <div class="eyebrow">03 — What I've been working on</div>
+
+        <h2 class="section-title">
+            My little <em>creations.</em>
+        </h2>
+
+        <p class="description projects-intro">
+            Here are some of my school-related works, creative ideas,
+            and achievements. Each one represents a part
+            of my learning journey.
+        </p>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div class="project-number">PROJECT 01 / ACADEMIC</div>
+
+                <h3> Achievements</h3>
+
+                <p>
+                   Activities and academic work that have helped me improve my knowledge, skills, and confidence. 
+                </p>
+
+                <span class="project-tag"> <a href= "me1.jpg"><u>LEARN MORE ↗</u></a></span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-number">PROJECT 02 / CREATIVE</div>
+
+                <h3>Website</h3>
+
+                <p>
+                  A website that I am still working on for a project in this class--called 'SafeSpace'. An anonymous peer-support community where you can share your struggles, find comfort in others, and express yourself without fear of judgment.
+                </p>
+
+                <span class="project-tag"><a href="try.html"><u>LEARN MORE ↗</u></a></span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-number">PROJECT 03 / RESEARCH</div>
+
+                <h3>AutoPest</h3>
+
+                <p>
+                    Recently, our research title was selected as Outstanding Research by the Institute of Industry and Academic Research Incorporated (IIARI) during the 7th International Conference on Multidisciplinary Industry and Academic Research (ICMIAR) - 2026.
+                </p>
+
+                <span class="project-tag"><a href="me3.jpg"><u>LEARN MORE ↗</u></a></span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+
+        <div class="eyebrow">04 — Let's connect</div>
+
+        <h2>
+            Let's keep in <em>touch.</em>
+        </h2>
+
+        <p class="description">
+            Thank you for visiting my portfolio! If you would like
+            to connect, share ideas, or simply say hello, feel free
+            to reach out.
+        </p>
+
+        <p>
+         <form action = "/submit-form" method = "POST">
+<label for = "name"> Name: </label>
+<input type = "text" id = "name" name = "name"><br><br>
+<label for = "email"> Email: </label>
+<input type = "email" id = "email" name = "email"><br><br>
+<label for = "message"> Message: </label>
+<textarea id = "message" name = "message" rows = "4" cols = "50"></textarea><br><br>
+<button type = "submit"> Send </button>
+            </form>
+        </p>
+
+        <div class="social-links">
+            <!-- Replace # with your actual social media links -->
+            <a href="https://www.instagram.com/jareamp/" target="_blank">Instagram ↗</a>
+            <a href="https://www.facebook.com/prince.hange/" target="_blank">Facebook ↗</a>
+            <a href="https://www.tiktok.com/@maerajj?lang=en" target="_blank">Tiktok ↗</a>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <span>&copy; 2026 Princess Maeraj E. Hermo. All rights reserved.</span>
+       <a href="#home">BACK TO THE BEGINNING ↑</a>
+    </footer>
+
+
+    <!-- DARK MODE SCRIPT -->
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+
+            const button = document.querySelector(".theme-button");
+
+            if (document.body.classList.contains("dark")) {
+                button.textContent = "☀ Light";
+            } else {
+                button.textContent = "☾ Theme";
+            }
+        }
+    </script>
+
+</body>
+</html>
